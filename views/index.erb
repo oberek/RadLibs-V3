@@ -1,0 +1,20 @@
+<div class="title">RadLibs</div>
+
+<div class="choice-boxes">
+    <div class="choice-box">
+      <h2>Stories</h2>
+      <% files = Dir["./public/uploads/*.txt"]%>
+      <% puts files%>
+      <% files.each { |file|%>
+        <div class="story">
+          <p><a class="navig" href="/story/<%=file.slice(file.rindex("/")+1, file.rindex(".")).chomp(".txt")%>"><%=file.slice(file.rindex("/")+1, file.rindex(".")).capitalize.chomp(".txt")%></a></p>
+        </div>
+      <%}%>
+    </div>
+
+  <a href="/upload">
+    <div class="choice-box">
+      <h2>Upload</h2>
+    </div>
+  </a>
+</div>

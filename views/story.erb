@@ -1,0 +1,17 @@
+<h1><%= @title.capitalize %></h1>
+<div class="fill-ins">
+  <form action="/story/<%= @title %>" method="POST">
+    <%counter =0%>
+    <% File.open("./public/uploads/#{@title}.txt", 'r') do |f| %>
+      <% f.each_line do |line| %>
+        <% line.split(" ").each do |word| %>
+          <% if word.start_with?("[") and word.end_with?("]") %>
+            <input type="text" placeholder="<%=word%>" name="param<%counter%>">
+            <%counter+=1%>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <input type="submit"/>
+  </form>
+</div>

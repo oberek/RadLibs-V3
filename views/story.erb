@@ -6,7 +6,7 @@
       <% f.each_line do |line| %>
         <% line.split(" ").each do |word| %>
           <% if word.start_with?("[") and word.end_with?("]") %>
-            <input type="text" placeholder="<%=word%>" name="param<%counter%>">
+            <input type="text" placeholder="<%=word%>" name="param<%=counter%>">
             <%counter+=1%>
           <% end %>
         <% end %>

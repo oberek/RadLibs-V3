@@ -11,6 +11,7 @@ get '/story/:title' do
 end
 
 post '/story/:title' do
+  # return params.to_s
   @title = params[:title]
   @post = params
   puts params
@@ -21,7 +22,7 @@ post '/story/:title' do
       line.split(' ').each do |word|
         if word.start_with?('[') && word.end_with?(']')
           # IT'S THIS LINE
-          @text << params[:param0]
+          @text << params["param#{@counter}".to_sym]
           @counter += 1
         else
           @text << word
@@ -35,7 +36,7 @@ post '/story/:title' do
 end
 
 get '/result' do
-  puts "Got to result"
+  puts "Go to result"
   @text = session[:text]
   @title = session[:title]
   erb('/result')

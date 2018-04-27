@@ -5,7 +5,7 @@
     <% File.open("./public/uploads/#{@title}.txt", 'r') do |f| %>
       <% f.each_line do |line| %>
         <% line.split(" ").each do |word| %>
-          <% if word.start_with?("[") and word.end_with?("]") %>
+          <% if word.include?("[") and word.include?("]")%>
             <input type="text" placeholder="<%=word%>" name="param<%=counter%>">
             <%counter+=1%>
           <% end %>

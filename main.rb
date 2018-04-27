@@ -14,32 +14,35 @@ post '/story/:title' do
   # return params.to_s
   @title = params[:title]
   @post = params
-  puts params
+  # puts params
   @counter = 0
   @text = ''
   File.open("./public/uploads/#{@title}.txt", 'r') do |f|
     f.each_line do |line|
       line.split(' ').each do |word|
-        if word.start_with?('[') && word.end_with?(']')
-          # IT'S THIS LINE
-          @text << params["param#{@counter}".to_sym]
+        if word.include?('[') && word.include?(']')
+          @text << params["param#{@counter}".to_sym] << ' '
           @counter += 1
         else
-          @text << word
+          @text << word << ' '
         end
       end
     end
   end
+  puts @text
   session[:text] = @text
   session[:title] = @title
+  # erb("/result/#{@title}".to_sym)
+  # redirect "/result/#{@title}"
   redirect '/result'
 end
 
 get '/result' do
-  puts "Go to result"
+  puts 'Go to result'
   @text = session[:text]
+  puts @text
   @title = session[:title]
-  erb('/result')
+  erb(:result)
 end
 
 get '/upload' do
